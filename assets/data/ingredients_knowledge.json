@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Water",
+    "normalizedName": "aqua",
+    "category": "Pelarut",
+    "potentialRisks": [],
+    "skinTypes": ["oily", "dry", "combination", "sensitive", "normal"],
+    "compatibility": "Umumnya cocok untuk semua jenis kulit.",
+    "whyItMatters": "Berfungsi sebagai pelarut utama untuk mencampurkan bahan lain.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Niacinamide",
+    "normalizedName": "niacinamide",
+    "category": "Vitamin / Pendukung Barrier",
+    "potentialRisks": ["Kemerahan ringan pada konsentrasi sangat tinggi"],
+    "skinTypes": ["oily", "dry", "combination", "sensitive", "normal"],
+    "compatibility": "Umumnya ditoleransi dengan baik oleh berbagai jenis kulit.",
+    "whyItMatters": "Turunan vitamin B3 yang membantu mendukung skin barrier dan keseimbangan minyak.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Alcohol Denat.",
+    "normalizedName": "alcohol denat",
+    "category": "Pelarut / Astringent",
+    "potentialRisks": ["Berpotensi mengiritasi", "Kulit kering"],
+    "skinTypes": ["oily"],
+    "compatibility": "Kurang ideal untuk kulit kering atau sensitif; dapat terasa mengeringkan.",
+    "whyItMatters": "Alkohol terdenaturasi cepat menguap dan dapat mengganggu kelembapan kulit sensitif.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Fragrance",
+    "normalizedName": "fragrance",
+    "category": "Pewangi",
+    "potentialRisks": ["Potensi alergen", "Berpotensi mengiritasi"],
+    "skinTypes": ["normal"],
+    "compatibility": "Berpotensi mengiritasi kulit sensitif atau mudah bereaksi.",
+    "whyItMatters": "Campuran pewangi sering menjadi pemicu sensitivitas kontak.",
+    "source": "IFRA / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Parfum",
+    "normalizedName": "parfum",
+    "category": "Pewangi",
+    "potentialRisks": ["Potensi alergen", "Berpotensi mengiritasi"],
+    "skinTypes": ["normal"],
+    "compatibility": "Berpotensi mengiritasi kulit sensitif atau mudah bereaksi.",
+    "whyItMatters": "Istilah INCI Eropa untuk campuran pewangi yang dapat memicu sensitivitas.",
+    "source": "IFRA / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Glycerin",
+    "normalizedName": "glycerin",
+    "category": "Humektan",
+    "potentialRisks": [],
+    "skinTypes": ["oily", "dry", "combination", "sensitive", "normal"],
+    "compatibility": "Umumnya cocok untuk semua jenis kulit.",
+    "whyItMatters": "Menarik kelembapan ke lapisan luar kulit tanpa terasa berat.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Sodium Lauryl Sulfate",
+    "normalizedName": "sodium lauryl sulfate",
+    "category": "Surfaktan",
+    "potentialRisks": ["Berpotensi mengiritasi", "Kulit kering"],
+    "skinTypes": ["oily"],
+    "compatibility": "Dapat terasa terlalu keras untuk kulit kering atau sensitif.",
+    "whyItMatters": "Agen pembersih kuat yang dapat mengurangi minyak alami kulit.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Mineral Oil",
+    "normalizedName": "paraffinum liquidum",
+    "category": "Oklusif / Emolien",
+    "potentialRisks": ["Terasa berat pada kulit berminyak"],
+    "skinTypes": ["dry", "sensitive", "normal"],
+    "compatibility": "Lebih cocok untuk kulit kering; dapat terasa berat bagi kulit berminyak.",
+    "whyItMatters": "Membentuk lapisan pelindung untuk mengurangi hilangnya kelembapan kulit.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Isopropyl Myristate",
+    "normalizedName": "isopropyl myristate",
+    "category": "Emolien",
+    "potentialRisks": ["Potensi komedogenik"],
+    "skinTypes": ["dry", "normal"],
+    "compatibility": "Kurang ideal untuk kulit berminyak atau rentan berjerawat.",
+    "whyItMatters": "Memberikan tekstur halus namun berpotensi menyumbat pori pada sebagian orang.",
+    "source": "Basis Pengetahuan Lokal"
+  },
+  {
+    "name": "Salicylic Acid",
+    "normalizedName": "salicylic acid",
+    "category": "Eksfolian (BHA)",
+    "potentialRisks": ["Kulit kering", "Over-eksfoliasi jika digabung bahan aktif lain"],
+    "skinTypes": ["oily", "combination"],
+    "compatibility": "Sering digunakan untuk kulit berminyak; perlu hati-hati pada kulit kering atau sensitif.",
+    "whyItMatters": "Asam beta hidroksi larut minyak yang membantu membersihkan pori-pori.",
+    "source": "Cosmetic Ingredient Review (CIR) / Basis Pengetahuan Lokal"
+  }
+]

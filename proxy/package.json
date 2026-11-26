@@ -1,0 +1,6 @@
+{
+  "name": "softly-ai-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free-tier Vercel Serverless Proxy for Softly skincare ingredient analysis"
+}
