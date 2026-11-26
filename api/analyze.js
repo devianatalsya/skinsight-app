@@ -7,7 +7,8 @@ export const config = {
   maxDuration: 30,
 };
 
-const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-3.8-flash').trim();
+const MODEL_PRIMARY = 'gemini-3.5-flash-lite';
+const MODEL_FALLBACK = 'gemini-3.8-flash';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -28,7 +29,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'skinType and ingredients are required' });
   }
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${DEFAULT_MODEL}:generateContent?key=${apiKey}`;
+  const endpoint = (model) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   const ingredientList = ingredients.map((i) => `"${String(i)}"`).join(', ');
 
   const prompt = `
@@ -77,39 +78,58 @@ Kembalikan hanya objek JSON. Tanpa markdown, tanpa blok kode, tanpa teks tambaha
     ],
   };
 
-  try {
-    const upstream = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const models = [MODEL_PRIMARY, MODEL_FALLBACK];
 
-    if (upstream.status === 429) {
-      return res.status(429).json({ error: 'Batas kuota Gemini tercapai (Quota exceeded)' });
+  let lastError = null;
+  for (let i = 0; i < models.length; i++) {
+    const model = models[i];
+    const isFallback = i > 0;
+    try {
+      const upstream = await fetch(endpoint(model), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (upstream.status === 429) {
+        lastError = 'Batas kuota Gemini tercapai (Quota exceeded)';
+        if (!isFallback) { await sleep(1500); continue; }
+        return res.status(429).json({ error: lastError });
+      }
+
+      if (upstream.status === 503) {
+        const errJson = await upstream.json().catch(() => ({}));
+        lastError = errJson?.error?.message || 'High demand, retrying...';
+        if (!isFallback) { await sleep(2000); continue; }
+        return res.status(503).json({ error: lastError });
+      }
+
+      if (!upstream.ok) {
+        const errText = await upstream.text();
+        let msg = errText;
+        try { const j = JSON.parse(errText); msg = j?.error?.message || errText; } catch (_) {}
+        if (!isFallback) { lastError = msg; await sleep(1500); continue; }
+        return res.status(502).json({ error: msg });
+      }
+
+      const data = await upstream.json();
+      const rawText = (data?.candidates?.[0]?.content?.parts?.[0]?.text || '')
+        .replace(/```json/g, '')
+        .replace(/```/g, '')
+        .trim();
+
+      const parsed = JSON.parse(rawText);
+      if (!parsed.overall_status || !parsed.summary) {
+        return res.status(502).json({ error: 'Format respons AI tidak valid' });
+      }
+
+      return res.status(200).json(parsed);
+    } catch (err) {
+      lastError = err.message || 'Gagal menghubungi Gemini';
+      if (!isFallback) { await sleep(1500); continue; }
     }
-    if (!upstream.ok) {
-      const errText = await upstream.text();
-      let msg = errText;
-      try {
-        const errJson = JSON.parse(errText);
-        msg = errJson?.error?.message || errText;
-      } catch (_) {}
-      return res.status(502).json({ error: msg });
-    }
-
-    const data = await upstream.json();
-    const rawText = (data?.candidates?.[0]?.content?.parts?.[0]?.text || '')
-      .replace(/```json/g, '')
-      .replace(/```/g, '')
-      .trim();
-
-    const parsed = JSON.parse(rawText);
-    if (!parsed.overall_status || !parsed.summary) {
-      return res.status(502).json({ error: 'Format respons AI tidak valid' });
-    }
-
-    return res.status(200).json(parsed);
-  } catch (err) {
-    return res.status(502).json({ error: err.message || 'Gagal menghubungi Gemini' });
   }
+
+  return res.status(502).json({ error: lastError });
 }
