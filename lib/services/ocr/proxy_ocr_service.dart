@@ -61,7 +61,30 @@ class ProxyOcrService implements OcrService {
       if (response.statusCode == 429) {
         throw const AiServiceException(AppStrings.errorQuotaExceeded);
       }
+      if (response.statusCode == 413) {
+        throw const AiServiceException('Ukuran foto terlalu besar. Coba ambil foto dengan resolusi lebih rendah.');
+      }
+      if (response.statusCode == 500) {
+        try {
+          final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+          if (decoded['error']?.toString().contains('API key') == true) {
+            throw const AiServiceException('GEMINI_API_KEY belum disetting di Vercel Settings -> Environment Variables.');
+          }
+        } catch (e) {
+          if (e is AiServiceException) rethrow;
+        }
+        throw const AiServiceException(AppStrings.errorUnavailable);
+      }
       if (response.statusCode != 200) {
+        try {
+          final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+          final err = decoded['error'] ?? decoded['details'];
+          if (err != null) {
+            throw AiServiceException('Server Vercel: $err');
+          }
+        } catch (e) {
+          if (e is AiServiceException) rethrow;
+        }
         throw const AiServiceException(AppStrings.errorUnavailable);
       }
 
@@ -77,8 +100,8 @@ class ProxyOcrService implements OcrService {
       throw const AiServiceException(AppStrings.errorNoInternet);
     } on AiServiceException {
       rethrow;
-    } catch (_) {
-      throw const AiServiceException(AppStrings.errorCantRead);
+    } catch (e) {
+      throw AiServiceException('Gagal memproses gambar: ${e.toString().replaceAll('Exception: ', '')}');
     }
   }
 

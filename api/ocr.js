@@ -1,3 +1,11 @@
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '4.5mb',
+    },
+  },
+};
+
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
 
 export default async function handler(req, res) {
