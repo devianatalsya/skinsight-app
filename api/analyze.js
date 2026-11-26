@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -78,7 +78,8 @@ Kembalikan hanya objek JSON. Tanpa markdown, tanpa blok kode, tanpa teks tambaha
       return res.status(429).json({ error: 'Quota exceeded' });
     }
     if (!upstream.ok) {
-      return res.status(502).json({ error: 'Upstream AI error' });
+      const errText = await upstream.text();
+      return res.status(502).json({ error: 'Upstream AI error', status: upstream.status, details: errText });
     }
 
     const data = await upstream.json();
@@ -89,11 +90,11 @@ Kembalikan hanya objek JSON. Tanpa markdown, tanpa blok kode, tanpa teks tambaha
 
     const parsed = JSON.parse(rawText);
     if (!parsed.overall_status || !parsed.summary) {
-      return res.status(502).json({ error: 'Invalid AI response format' });
+      return res.status(502).json({ error: 'Invalid AI response format', rawText });
     }
 
     return res.status(200).json(parsed);
-  } catch (_) {
-    return res.status(502).json({ error: 'Upstream request failed' });
+  } catch (err) {
+    return res.status(502).json({ error: 'Upstream request failed', message: err.message });
   }
 }

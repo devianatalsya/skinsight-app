@@ -49,7 +49,7 @@ class IngredientNormalizer {
 class GeminiOcrService implements OcrService {
   static const String _model = String.fromEnvironment(
     'GEMINI_MODEL',
-    defaultValue: 'gemini-2.5-flash',
+    defaultValue: 'gemini-1.5-flash',
   );
 
   static String get _baseUrl =>
