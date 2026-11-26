@@ -6,7 +6,7 @@ export const config = {
   },
 };
 
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-1.5-flash').trim();
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -16,9 +16,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const rawKey = process.env.GEMINI_API_KEY || '';
+  const apiKey = rawKey.trim().replace(/^["']|["']$/g, '');
   if (!apiKey) {
-    return res.status(500).json({ error: 'Server API key not configured' });
+    return res.status(500).json({ error: 'GEMINI_API_KEY belum disetting di Vercel' });
   }
 
   const { imageBase64, mimeType } = req.body || {};
@@ -62,10 +63,16 @@ export default async function handler(req, res) {
     });
 
     if (upstream.status === 429) {
-      return res.status(429).json({ error: 'Quota exceeded' });
+      return res.status(429).json({ error: 'Batas kuota Gemini tercapai (Quota exceeded)' });
     }
     if (!upstream.ok) {
-      return res.status(502).json({ error: 'Upstream AI error' });
+      const errText = await upstream.text();
+      let msg = errText;
+      try {
+        const errJson = JSON.parse(errText);
+        msg = errJson?.error?.message || errText;
+      } catch (_) {}
+      return res.status(502).json({ error: msg });
     }
 
     const data = await upstream.json();
@@ -76,7 +83,7 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({ text });
-  } catch (_) {
-    return res.status(502).json({ error: 'Upstream request failed' });
+  } catch (err) {
+    return res.status(502).json({ error: err.message || 'Gagal menghubungi Gemini' });
   }
 }
