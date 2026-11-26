@@ -24,7 +24,7 @@ class ServiceLocator {
 
   static const String apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: '',
+    defaultValue: 'https://softly-skincare.vercel.app',
   );
 
   static bool get isUsingProxy => apiBaseUrl.trim().isNotEmpty && !useMockAi;

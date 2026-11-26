@@ -48,5 +48,6 @@ local.properties
 .env
 .env.local
 *.env
-*secret*
-*api_key*
+api_config.json
+*.key
+
