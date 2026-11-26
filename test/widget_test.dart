@@ -66,7 +66,7 @@ void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(const SoftlyApp());
     await tester.pump(const Duration(seconds: 1));
-    expect(find.text('softly'), findsOneWidget);
+    expect(find.bySemanticsLabel(AppStrings.appName), findsOneWidget);
   });
 
   test('IngredientNormalizer splits and cleans Indonesian/English OCR text', () {

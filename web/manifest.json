@@ -1,6 +1,6 @@
 {
-    "name": "flashcard_app",
-    "short_name": "flashcard_app",
+    "name": "SkinSight",
+    "short_name": "SkinSight",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

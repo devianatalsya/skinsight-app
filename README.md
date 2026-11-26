@@ -1,71 +1,71 @@
-# Softly — Skincare & Cosmetic Ingredient Safety Checker
+# SkinSight — Pemeriksa Keamanan Komposisi Skincare & Kosmetik
 
-Softly is a Flutter + Dart mobile application that helps users evaluate skincare and cosmetic ingredient lists based on their skin type by scanning product packaging with OCR and analyzing ingredients through an abstracted AI layer.
+**SkinSight** adalah aplikasi mobile berbasis Flutter & Dart yang membantu pengguna mengevaluasi daftar komposisi produk _skincare_ dan kosmetik sesuai jenis kulit mereka dengan memindai foto kemasan menggunakan OCR dan menganalisis bahan melalui lapisan AI yang terabstraksi.
 
 ---
 
-## 1. Project Overview
+## 1. Gambaran Umum
 
-Softly provides a calm, minimalist mobile experience ("digital wellness") to scan product ingredient labels, extract ingredient names, and surface non-medical, informational insights tailored to a user's skin type (`Oily`, `Dry`, `Combination`, `Sensitive`, `Normal`).
+SkinSight menghadirkan pengalaman mobile yang tenang dan minimalis (_digital wellness_) untuk memindai label komposisi produk, mengekstrak nama bahan, serta menyajikan informasi edukatif non-medis yang disesuaikan dengan jenis kulit pengguna (`Berminyak`, `Kering`, `Kombinasi`, `Sensitif`, dan `Normal`).
 
-## 2. Problem Statement
+## 2. Latar Belakang Masalah
 
-Many consumers purchase skincare or cosmetic products based on viral reviews without understanding the ingredient list printed on the packaging. This can lead to:
+Banyak konsumen membeli produk _skincare_ atau kosmetik hanya berdasarkan ulasan viral tanpa memahami daftar komposisi (_ingredients_) pada kemasan. Hal ini berisiko menimbulkan:
 
-- Skin irritation or sensitization
-- Breakouts and clogged pores (comedogenicity)
-- Excessive dryness or compromised skin barrier
-- Unintended reactions from active ingredient combinations
+- Iritasi atau sensitivitas kulit
+- Jerawat dan pori-pori tersumbat (_comedogenic_)
+- Kulit terlalu kering atau rusaknya _skin barrier_
+- Reaksi yang tidak diinginkan akibat kombinasi bahan aktif
 
-Additionally, international cosmetic databases often lack coverage for newer or local Indonesian and Asian skincare products. Users also find manual typing of long INCI ingredient lists tedious.
+Selain itu, basis data kosmetik internasional sering kali belum mencakup produk lokal Indonesia maupun Asia terbaru, dan mengetik daftar komposisi INCI yang panjang secara manual sangat merepotkan.
 
-## 3. Solution
+## 3. Solusi
 
-Softly streamlines ingredient checking into a simple flow:
+SkinSight menyederhanakan pengecekan komposisi menjadi alur yang ringkas:
 
-1. Select your skin type.
-2. Take or pick a photo of the product's ingredient list.
-3. Extract text via an abstracted OCR service.
-4. Normalize ingredients and analyze compatibility via an abstracted AI service.
-5. View a clear summary (`Looks good` or `Needs attention`), flagged ingredients, and educational details.
+1. Pilih jenis kulitmu.
+2. Ambil atau pilih foto daftar komposisi pada kemasan produk.
+3. Ekstrak teks komposisi melalui layanan OCR (`OcrService`).
+4. Normalisasi nama bahan dan analisis kecocokannya melalui layanan AI (`AIService`).
+5. Lihat ringkasan hasil (`Aman dicoba`, `Waspada`, atau `Perlu diperhatikan`), daftar bahan yang disorot, serta detail edukatif tiap bahan.
 
-Softly intentionally avoids medical diagnoses and absolute safety claims, using informative, cautious phrasing instead.
+SkinSight tidak memberikan diagnosis medis maupun klaim keamanan mutlak, melainkan informasi yang bersifat edukatif dan berhati-hati.
 
-## 4. Main Features
+## 4. Fitur Utama
 
-- **Home**: Minimalist hero screen with animated organic blobs and quick entry to scanning or FAQ.
-- **Skin Type Selection**: Choose from Oily, Dry, Combination, Sensitive, or Normal skin.
-- **Scanner**: Large rounded image picker supporting photo selection/capture, image preview, retake, and analysis trigger.
-- **OCR & Analysis Progress**: Calm step-by-step progress indicators (`Reading ingredients...`, `Checking compatibility...`, `Almost there...`).
-- **Analysis Result**: Clear status summary, skin type context, flagged ingredient cards, non-medical disclaimers, and expandable raw ingredient list.
-- **Ingredient Details**: Category, potential concern, why it matters, skin compatibility, and knowledge source reference.
-- **Scan History**: Locally persisted scan records with relative timestamps and quick revisit/delete actions.
-- **Interactive FAQ**: Smooth animated accordion answering common questions.
-- **Offline/Development Mock Mode**: Works out of the box without an API key via `MockAIService` and `MockOcrService`.
+- **Beranda (_Home_)**: Tampilan minimalis dengan animasi _organic blob_, logo SkinSight, serta akses cepat ke pemindaian atau halaman FAQ.
+- **Pemilihan Jenis Kulit**: Mendukung pilihan kulit **Berminyak**, **Kering**, **Kombinasi**, **Sensitif**, dan **Normal**.
+- **Pemindai (_Scanner_)**: Pemilihan foto dari galeri/file beserta pratinjau gambar, tombol ulangi, dan pemicu analisis.
+- **Progres OCR & Analisis**: Indikator progres bertahap (`Membaca komposisi...`, `Memeriksa kecocokan...`, `Sebentar lagi...`).
+- **Hasil Analisis**: Ringkasan status (`Aman dicoba`, `Waspada`, `Perlu diperhatikan`), konteks jenis kulit, kartu bahan yang perlu diperhatikan, disclaimer non-medis, serta daftar seluruh bahan yang terdeteksi.
+- **Detail Bahan**: Menampilkan kategori, potensi perhatian, alasan pentingnya bahan, kecocokan kulit, catatan, dan sumber referensi dari basis pengetahuan lokal.
+- **Riwayat Scan**: Menyimpan riwayat pemindaian secara lokal di perangkat dengan waktu relatif, serta aksi lihat ulang atau hapus.
+- **FAQ Interaktif**: Akordeon animasi yang menjawab pertanyaan umum seputar SkinSight.
+- **Mode Fleksibel**: Mendukung mode Proxy Vercel (bawaan), mode Gemini langsung (dengan _API key_ via `--dart-define` atau disimpan lokal melalui dialog _Atur API Key_), serta mode Mock untuk pengembangan/pengujian offline.
 
-## 5. User Flow
+## 5. Alur Pengguna
 
 ```text
-Home -> Select Skin Type -> Scanner (Pick/Capture Image) -> OCR & AI Analysis -> Result -> Ingredient Details
-                                                                                   |
-                                                                            Local History
+Beranda -> Pilih Jenis Kulit -> Pemindai (Pilih Foto) -> OCR & Analisis AI -> Hasil -> Detail Bahan
+                                                                                |
+                                                                          Riwayat Lokal
 ```
 
-## 6. Technology Stack
+## 6. Teknologi yang Digunakan
 
 - **Framework**: Flutter (Material 3)
-- **Language**: Dart
-- **AI Provider (Initial)**: Google Gemini 1.5 Flash REST API (Free Tier) + `MockAIService` fallback
-- **OCR Provider (Initial)**: Gemini Vision multimodal OCR + `MockOcrService` fallback
-- **Persistence**: Local JSON file storage via `path_provider`
+- **Bahasa**: Dart
+- **AI & OCR Provider**:
+  - **Proxy Vercel** (`ProxyAIService` & `ProxyOcrService`) ke backend serverless (`api/` / `proxy/`)
+  - **Google Gemini REST API** (`GeminiAIService` & `GeminiOcrService`, default model `gemini-2.5-flash`)
+  - **Mode Mock** (`MockAIService` & `MockOcrService`) untuk pengembangan/pengujian offline
+- **Penyimpanan Lokal**: File JSON lokal menggunakan `path_provider`
 
-## 7. Flutter / Dart Version
+## 7. Versi Flutter / Dart & Dependensi
 
-- **Dart SDK constraint**: `^3.13.4` (matching existing workspace configuration)
+- **Dart SDK constraint**: `^3.13.4`
 
-## 8. Existing Dependencies
-
-Softly uses only the pre-existing dependencies from the project environment without adding or modifying versions:
+Dependensi pada `pubspec.yaml`:
 
 - `flutter` (SDK)
 - `cupertino_icons: ^1.0.8`
@@ -76,21 +76,25 @@ Softly uses only the pre-existing dependencies from the project environment with
 - `flutter_test` (dev)
 - `flutter_lints: ^6.0.0` (dev)
 
-## 9. Project Structure
+## 8. Struktur Proyek
 
 ```text
+api/                               # Endpoint serverless Vercel (index.js, ocr.js, analyze.js)
+proxy/                             # Paket proxy Vercel terpisah (api/ocr.js, api/analyze.js, vercel.json)
 assets/
   data/
-    ingredients_knowledge.json   # Local seed ingredient knowledge base
+    ingredients_knowledge.json     # Basis pengetahuan bahan lokal
+  images/
+    skinsight_logo.png             # Logo resmi SkinSight
 lib/
   core/
     constants/
-      app_colors.dart            # Pastel digital wellness color palette
-      app_strings.dart           # Concise UI copy & error messages
+      app_colors.dart              # Palet warna pastel digital wellness
+      app_strings.dart             # Teks UI & pesan error berbahasa Indonesia
     theme/
-      app_theme.dart             # Material 3 theme (Outfit + Reenie Beanie)
+      app_theme.dart               # Tema Material 3 (Outfit & Reenie Beanie)
     utils/
-      animation_utils.dart       # Organic blob painter & animation constants
+      animation_utils.dart         # Utilitas animasi & organic blob painter
   data/
     datasources/
       history_local_datasource.dart
@@ -119,6 +123,7 @@ lib/
       scanner_page.dart
       skin_type_page.dart
     widgets/
+      api_key_sheet.dart           # Bottom sheet pengaturan API key Gemini lokal
       blob_background.dart
       floating_nav_bar.dart
       shared_widgets.dart
@@ -127,232 +132,132 @@ lib/
       ai_service.dart
       gemini_ai_service.dart
       mock_ai_service.dart
+      proxy_ai_service.dart
+    config/
+      api_key_store.dart           # Penyimpanan API key lokal (api_config.json)
     ocr/
       ocr_service.dart
-    service_locator.dart
+      proxy_ocr_service.dart
+    service_locator.dart           # Pemilihan provider AI & OCR
   main.dart
 ```
 
-## 10. Architecture
+## 9. Arsitektur Aplikasi
 
-Softly follows a layered Clean Architecture pattern:
+SkinSight menerapkan pola _layered Clean Architecture_:
 
 ```text
 Presentation (Pages & Widgets)
    -> Controllers (ChangeNotifier: ScanController, HistoryController)
       -> Services & Repositories (AIService, OcrService, IngredientRepository, HistoryRepository)
-         -> Data Sources / External APIs (Gemini REST API, Local JSON, Local Storage)
+         -> Data Sources / External APIs (Vercel Proxy / Gemini REST API / Local JSON / Local Storage)
 ```
 
-- **UI Independence**: Pages never import `GeminiAIService` or `MockAIService` directly. They communicate only through `ScanController` and `ServiceLocator`.
-- **Separated Concerns**: OCR extraction, ingredient normalization, ingredient knowledge lookup, skin profile selection, AI analysis, and explanation presentation are cleanly decoupled.
+- **UI Independen**: Halaman UI tidak mengimpor implementasi spesifik seperti `GeminiAIService` atau `MockAIService`, melainkan berkomunikasi melalui `ScanController` dan `ServiceLocator`.
+- **Pemisahan Tanggung Jawab**: Ekstraksi OCR, normalisasi bahan (`IngredientNormalizer`), pencarian pengetahuan bahan, pemilihan profil kulit, analisis AI, dan tampilan hasil dipisahkan secara modular.
 
-## 11. AI Architecture
+## 10. Alur OCR & Analisis Bahan
 
-```text
-UI
- |
-ScanController
- |
-AIService (abstract interface)
- |--- MockAIService (offline / no API key)
- |--- GeminiAIService (Gemini 1.5 Flash REST API)
- |--- [Future] RAGAIService
- |--- [Future] FineTunedAIService
-```
+1. Pengguna memilih foto komposisi pada `ScannerPage` menggunakan `file_picker`.
+2. `ScanController.analyze()` mengirim path gambar ke `OcrService.extractText(imagePath)`.
+3. `IngredientNormalizer.normalize(rawText)` membersihkan awalan umum (seperti `Ingredients:`, `INCI Name:`, `Komposisi:`), menormalisasi pemisah (`,`, `;`, `/`, bullet, baris baru), dan menghasilkan `List<String>`.
+4. `ScanController` mengirim daftar bahan yang telah dinormalisasi beserta `SkinType` ke `AIService.analyzeIngredients()`.
+5. `AIService` mengembalikan `AnalysisResult` tervalidasi (`overallStatus`, `summary`, `flaggedIngredients`, `detectedIngredients`, `warnings`).
+6. Saat pengguna mengetuk bahan yang disorot, `IngredientDetailPage` mengambil detail tambahan dari `IngredientRepository` berdasarkan `assets/data/ingredients_knowledge.json`.
 
-To swap AI providers, implement `AIService` and update `ServiceLocator.aiService` in `lib/services/service_locator.dart`. No UI code needs to change.
+## 11. Konfigurasi Mode Layanan (`ServiceLocator`)
 
-## 12. OCR Flow
+`ServiceLocator` (`lib/services/service_locator.dart`) menentukan provider AI dan OCR berdasarkan urutan prioritas berikut:
 
-1. User selects an image in `ScannerPage` using `file_picker`.
-2. `ScanController.analyze()` passes the image path to `OcrService.extractText(imagePath)`.
-3. If `GEMINI_API_KEY` is configured, `GeminiOcrService` sends the base64-encoded image to Gemini Vision. Otherwise, `MockOcrService` returns sample INCI text for development.
-4. `IngredientNormalizer.normalize(rawText)` strips common label prefixes (`Ingredients:`, `INCI Name:`), normalizes separators (`,`, `;`, `/`, bullets, newlines), and produces a clean `List<String>`.
+1. **Mode Mock (`USE_MOCK_AI=true`)**
+   Menggunakan `MockAIService` dan `MockOcrService` untuk pengembangan/pengujian offline:
 
-## 13. Ingredient Analysis Flow
+   ```bash
+   flutter run --dart-define=USE_MOCK_AI=true
+   ```
 
-1. `ScanController` sends the normalized `List<String>` and selected `SkinType` to `AIService.analyzeIngredients()`.
-2. `AIService` returns a validated `AnalysisResult` containing `overallStatus`, `summary`, `flaggedIngredients`, and `warnings`.
-3. When a user taps a flagged ingredient, `IngredientDetailPage` queries `IngredientRepository` to enrich the view with category, skin compatibility, and reference source from `assets/data/ingredients_knowledge.json`.
+   Secara default (`USE_MOCK_AI=false`), aplikasi **tidak** diam-diam menampilkan hasil palsu jika OCR atau AI gagal, melainkan menampilkan layar error yang jelas.
 
-## 14. Gemini Integration
+2. **Mode Proxy Vercel (`API_BASE_URL` terisi, bawaan aktif)**
+   Pengguna tidak perlu memasukkan API key apa pun karena `GEMINI_API_KEY` disimpan di sisi server (Vercel). Secara default `API_BASE_URL` mengarah ke URL proxy bawaan, atau dapat diarahkan ke deployment milik sendiri:
 
-`GeminiAIService` and `GeminiOcrService` use Google's Gemini 2.5 Flash (`generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`, configurable via `--dart-define=GEMINI_MODEL=...`) via `package:http`:
+   ```bash
+   flutter run --dart-define=API_BASE_URL=https://project-anda.vercel.app
+   flutter build apk --dart-define=API_BASE_URL=https://project-anda.vercel.app
+   ```
 
-- Enforces `responseMimeType: "application/json"` and low temperature (`0.2`) for deterministic structured Indonesian JSON output.
-- Applies a 30-second timeout and strips accidental markdown fences before parsing.
-- Validates JSON fields into `AnalysisResult` and `FlaggedIngredient`.
-- Instructs Gemini Vision OCR to return `NO_INGREDIENTS_FOUND` when a photo does not show a readable ingredient list, triggering an explicit error state instead of hallucinating results.
+   Untuk men-deploy proxy sendiri:
 
-## 15. API Key & Vercel Proxy Configuration
-
-**Never hard-code API keys in source code or commit them to Git.**
-
-Softly supports three modes (configured automatically in `ServiceLocator`):
-
-### Option A — Vercel Functions Proxy (Recommended for Sharing / Public APK)
-Users do **not** need to enter any API key. Your `GEMINI_API_KEY` stays safely on Vercel:
-
-1. Deploy the `proxy/` folder to [Vercel](https://vercel.com) (free tier):
    ```bash
    cd proxy
    npx vercel
    ```
-2. In Vercel Project Settings -> **Environment Variables**, add:
-   - `GEMINI_API_KEY` = your free-tier key from [Google AI Studio](https://aistudio.google.com)
-   - (Optional) `GEMINI_MODEL` = `gemini-2.5-flash`
-3. Build or run Flutter pointing to your Vercel URL:
+
+   Lalu tambahkan _Environment Variable_ `GEMINI_API_KEY` (dan opsional `GEMINI_MODEL`, default `gemini-2.5-flash`) di pengaturan proyek Vercel.
+
+3. **Mode Gemini Langsung (Tanpa Proxy)**
+   Kosongkan `API_BASE_URL` dan masukkan API key Gemini melalui `--dart-define` atau melalui ikon kunci di Beranda / tombol `"Atur API Key"` di halaman error (tersimpan lokal di `api_config.json`):
    ```bash
-   flutter run --dart-define=API_BASE_URL=https://your-project.vercel.app
-   flutter build apk --dart-define=API_BASE_URL=https://your-project.vercel.app
+   flutter run --dart-define=API_BASE_URL="" --dart-define=GEMINI_API_KEY=api_key_anda
    ```
 
-### Option B — Direct Gemini Mode (No Backend Needed)
-1. Pass the key at build/run time via `--dart-define=GEMINI_API_KEY=...`, OR
-2. Tap the key icon on the Home screen or `"Atur API Key"` on the error screen to save a personal free Gemini API key locally on-device (`api_config.json`).
+## 12. Penanganan Error
 
-### Option C — Explicit Mock Mode (Offline Development / Testing)
-```bash
-flutter run --dart-define=USE_MOCK_AI=true
-```
-By default (`USE_MOCK_AI=false`), Softly **never** silently falls back to fake mock results when OCR or AI fails—instead it displays a clear error state so you always know whether the AI scan succeeded or failed.
+`ScanController` dan lapisan layanan mengubah error menjadi pesan singkat berbahasa Indonesia tanpa mengekspos _stack trace_:
 
-## 16. Error Handling
+- Daftar komposisi tidak terbaca -> `"Daftar komposisi tidak terbaca pada foto."`
+- Tidak ada koneksi internet -> `"Tidak ada koneksi internet."`
+- API key belum diatur -> `"API key Gemini belum dikonfigurasi."`
+- API key ditolak -> `"API key Gemini tidak valid atau ditolak."`
+- Batas kuota API tercapai -> `"Batas penggunaan API tercapai. Coba lagi nanti."`
+- Izin akses foto ditolak -> `"Izin akses foto ditolak."`
+- Waktu permintaan habis -> `"Waktu permintaan habis. Coba lagi."`
+- Format respons AI tidak valid -> `"Format respons AI tidak valid."`
+- Layanan AI tidak tersedia -> `"Analisis AI sedang tidak tersedia saat ini."`
 
-`ScanController` and service classes handle and sanitize errors into short, user-friendly messages without exposing stack traces:
+## 13. Model Data
 
-- Missing API key -> `"API key not configured."` (or automatic Mock fallback via `ServiceLocator`)
-- Unreadable/empty ingredients -> `"Couldn't read the ingredients."`
-- Permission denied -> `"Permission denied."`
-- Network unavailable -> `"No internet connection."`
-- Request timeout -> `"Request timed out."`
-- Invalid AI JSON response -> `"Received an invalid response."`
-- General API failure -> `"Analysis is unavailable right now."`
-
-## 17. Data Models
-
-- **`SkinType`**: Enum (`oily`, `dry`, `combination`, `sensitive`, `normal`) with label and short description.
+- **`SkinType`**: Enum (`oily`, `dry`, `combination`, `sensitive`, `normal`) beserta label dan deskripsi singkat berbahasa Indonesia.
 - **`Ingredient`**: `name`, `normalizedName`, `category`, `potentialRisks`, `skinTypes`, `compatibility`, `whyItMatters`, `source`.
 - **`FlaggedIngredient`**: `name`, `risk`, `reason`.
 - **`AnalysisResult`**: `overallStatus` (`safe`, `warning`, `caution`), `summary`, `flaggedIngredients`, `detectedIngredients`, `warnings`, `confidence`, `rawOcrText`, `analyzedAt`.
 - **`ScanRecord`**: `id`, `productLabel`, `skinType`, `result`, `imagePath`, `scannedAt`.
 
-## 18. AI Response Schema
+## 14. Menjalankan & Mem-build Aplikasi
 
-### Input Concept
-```json
-{
-  "skin_type": "sensitive",
-  "ingredients": [
-    "Water",
-    "Niacinamide",
-    "Alcohol Denat.",
-    "Fragrance"
-  ]
-}
-```
+### Menjalankan Aplikasi
 
-### Expected Output JSON Schema
-```json
-{
-  "overall_status": "warning",
-  "summary": "Some ingredients may require attention for sensitive skin.",
-  "flagged_ingredients": [
-    {
-      "name": "Alcohol Denat.",
-      "risk": "Potential irritation",
-      "reason": "May be irritating on sensitive or dry skin."
-    }
-  ],
-  "warnings": [
-    "This is not a medical diagnosis. Patch test recommended."
-  ],
-  "confidence": 0.85
-}
-```
-
-## 19. Current Limitations
-
-- **Mock Mode Without Key**: Without `GEMINI_API_KEY`, OCR and AI analysis use deterministic mock data for development/demo purposes.
-- **On-Device OCR**: No dedicated on-device ML Kit OCR dependency was added to honor strict dependency constraints; OCR uses Gemini Vision or mock fallback.
-- **Image Cropping**: Image preview and retake are supported; manual cropping is omitted to avoid adding external cropping dependencies.
-- **Local Knowledge Seed**: `assets/data/ingredients_knowledge.json` contains an initial sample dataset rather than a complete BPOM/CosIng database.
-
-## 20. RAG Readiness
-
-The codebase separates:
-1. OCR extraction (`OcrService`)
-2. Ingredient normalization (`IngredientNormalizer`)
-3. Knowledge retrieval (`IngredientKnowledgeDataSource` & `IngredientRepository`)
-4. User skin profile (`SkinType`)
-5. AI reasoning (`AIService`)
-
-### Future RAG Architecture
-
-```text
-User Image
-  -> OCR (OcrService)
-  -> Ingredient Normalization (IngredientNormalizer)
-  -> Retrieval (Vector DB / BPOM / CosIng API via IngredientKnowledgeDataSource)
-  -> Ingredient Knowledge Base (Validated Sources)
-  -> Context Injection (Prompt + Retrieved Ingredient Facts)
-  -> AI Model (RAGAIService implements AIService)
-  -> Structured Analysis (AnalysisResult)
-  -> UI (ResultPage & IngredientDetailPage)
-```
-
-Using a Retrieval-Augmented Generation (RAG) pipeline ensures that ingredient assessments are grounded in validated cosmetic safety databases (such as BPOM, CIR, or CosIng) rather than relying solely on generic LLM pre-training memory—especially important for local Indonesian and Asian skincare products.
-
-## 21. Fine-Tuning Readiness
-
-### Future Fine-Tuning Architecture
-
-Because the presentation layer depends only on `AIService` and `AnalysisResult`, a domain-specific fine-tuned model (e.g., a fine-tuned Gemma, Llama, or Gemini tuned model specialized in INCI nomenclature and Indonesian skincare formulations) can be integrated by creating:
-
-```dart
-class FineTunedAIService implements AIService {
-  // Calls fine-tuned model endpoint or local inference runtime
-}
-```
-
-Registering it in `ServiceLocator.aiService` replaces the active provider without modifying any page, widget, or controller.
-
-## 22. Future Development
-
-- Integrate a vector database / RAG backend for Indonesian BPOM and Asian cosmetic ingredient coverage.
-- Add on-device OCR support for offline ingredient scanning.
-- Expand `ingredients_knowledge.json` or sync with a validated cosmetic ingredient dataset.
-- Support active-ingredient combination conflict warnings across multiple scanned products in a user's routine.
-
-## 23. How to Run
-
-### Development / Mock Mode (No API Key Required)
 ```bash
 flutter pub get
+
+# Mode bawaan (Proxy)
 flutter run
+
+# Mode Mock (Offline / Testing)
+flutter run --dart-define=USE_MOCK_AI=true
+
+# Mode Gemini Langsung
+flutter run --dart-define=API_BASE_URL="" --dart-define=GEMINI_API_KEY=api_key_anda
 ```
 
-### With Gemini API (Free Tier)
-```bash
-flutter pub get
-flutter run --dart-define=GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-## 24. How to Build
+### Build Android
 
 ```bash
 # Android APK
-flutter build apk --dart-define=GEMINI_API_KEY=your_gemini_api_key_here
+flutter build apk
 
 # Android App Bundle
-flutter build appbundle --dart-define=GEMINI_API_KEY=your_gemini_api_key_here
+flutter build appbundle
 ```
 
-## 25. Security Considerations
+### Menjalankan Pengujian
 
-- **No Hard-Coded Secrets**: API keys are injected at compile/run time via `--dart-define`.
-- **Git Hygiene**: `.gitignore` blocks `.env` and secret files from version control.
-- **No UI Exposure**: API keys are never displayed in the UI or error messages.
-- **Strict Response Parsing**: Raw AI responses are stripped, JSON-decoded, and validated into strongly typed entities (`AnalysisResult`) before rendering.
-- **Non-Medical Disclaimer**: Outputs are strictly informational and never claim medical certainty.
+```bash
+flutter test
+```
+
+## 15. Keamanan & Privasi
+
+- **Tanpa Secret Hardcoded**: API key tidak pernah ditulis langsung di dalam kode sumber; diinjeksi lewat `--dart-define`, environment variable Vercel, atau disimpan lokal di perangkat (`api_config.json`).
+- **Validasi Respons Ketat**: Respons mentah dari AI dibersihkan dari _markdown fence_, di-decode, dan divalidasi menjadi entitas bertipe kuat (`AnalysisResult`) sebelum ditampilkan.
+- **Disclaimer Non-Medis**: Seluruh hasil analisis bersifat edukatif dan tidak menggantikan konsultasi atau diagnosis dokter kulit.

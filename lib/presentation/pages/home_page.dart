@@ -74,34 +74,11 @@ class _HomeContent extends StatelessWidget {
                 delay: const Duration(milliseconds: 100),
                 child: Row(
                   children: [
-                    Container(
-                      width: 28,
-                      height: 28,
-                      decoration: const BoxDecoration(
-                        color: AppColors.coral,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: SizedBox(
-                          width: 8,
-                          height: 8,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'softly',
-                      style: GoogleFonts.outfit(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.darkText,
-                      ),
+                    Image.asset(
+                      'assets/images/skinsight_logo.png',
+                      height: 26,
+                      fit: BoxFit.contain,
+                      semanticLabel: AppStrings.appName,
                     ),
                     const Spacer(),
                     if (!ServiceLocator.isUsingProxy)

@@ -1,7 +1,7 @@
 class AppStrings {
   AppStrings._();
 
-  static const String appName = 'Softly';
+  static const String appName = 'SkinSight';
 
   // Home
   static const String homeHeadline1 = 'Kenali ';
@@ -66,7 +66,7 @@ class AppStrings {
 
   // FAQ
   static const String faqTitle = 'Pertanyaan';
-  static const String faqSubtitle = 'Pertanyaan umum tentang Softly.';
+  static const String faqSubtitle = 'Pertanyaan umum tentang SkinSight.';
 
   // Navigation
   static const String navHome = 'Beranda';

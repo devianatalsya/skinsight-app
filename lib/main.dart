@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
 import 'presentation/pages/home_page.dart';
 import 'presentation/widgets/shared_widgets.dart';
@@ -14,7 +15,7 @@ class SoftlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Softly',
+      title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       builder: (context, child) {
