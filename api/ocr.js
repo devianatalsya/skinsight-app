@@ -6,7 +6,7 @@ export const config = {
   },
 };
 
-const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-1.5-flash').trim();
+const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {

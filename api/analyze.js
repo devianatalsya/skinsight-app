@@ -1,4 +1,13 @@
-const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-1.5-flash').trim();
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
+  maxDuration: 30,
+};
+
+const DEFAULT_MODEL = (process.env.GEMINI_MODEL || 'gemini-2.0-flash').trim();
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
